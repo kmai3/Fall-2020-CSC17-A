@@ -1,67 +1,88 @@
 /* 
  * File:   main.cpp
- * Author: Kevin Mai
- * Created on September 17, 2020
- * Purpose:  Sorting an array of characters if specified correctly
+ * Author: Dr. Mark E. Lehr
+ * Created on Sept 21st, 2020, 1:14 PM
+ * Purpose:  Example of a Dynamic Array
  */
 
-//System Libraries Here
-#include <iostream>//cout,cin
-#include <cstring> //strlen()
+//System Libraries
+#include <iostream>  //I/O Library
+#include <cstdlib>   //Random Number Library
+#include <ctime>     //Time to set the random number seed
 using namespace std;
 
-//User Libraries Here
+//User Libraries
 
-//Global Constants Only, No Global Variables
-//Like PI, e, Gravity, or conversions
+//Global Constants Only
+//Well known Science, Mathematical and Laboratory Constants
 
-//Function Prototypes Here
-int  read(char []);
-void sort(char [],int);
-void print(const char [],int);
+//Function Prototypes
+int *filAray(int);
+void prntAry(const int *,int,int);
+void markSrt(int *,int);
 
-//Program Execution Begins Here
+//Execution of Code Begins Here
 int main(int argc, char** argv) {
-    //Declare all Variables Here
-    const int SIZE=80;//Larger than needed
-    char array[SIZE]; //Character array larger than needed
-    int sizeIn,sizeDet;//Number of characters to be read, check against length
+    //Set the random number seed here
+    srand(static_cast<unsigned int>(time(0)));
     
-    //Input the size of the array you are sorting
-    cout<<"Read in a 1 dimensional array of characters and sort"<<endl;
-    cout<<"Input the array size where size <= 20"<<endl;
-    cin>>sizeIn>>array;
-    //Now read in the array of characters and determine it's size
-    cout<<"Now read the Array"<<endl;
-    sizeDet=read(array);//Determine it's size
+    //Declare all variables for this function
+    int size=100;
+    int perLine=10;
+    int *array;
     
-    //Compare the size input vs. size detected and sort if same
-    //Else output different size to sort
-    if(sizeDet==sizeIn){
-        sort(array,sizeIn); //Sort the array
-        print(array,sizeIn);//Print the array
-    }else{
-        cout<<(sizeDet<sizeIn?"Input size less than specified.":
-            "Input size greater than specified.")<<endl;
-    }
+    //Initialize all known variables
+    array=filAray(size);
+    cout<<"Before Sorting"<<endl;
+    prntAry(array,size,perLine);
     
-    //Exit
+    //Process Inputs to Outputs -> Mapping Process
+    //Maps known values to the unknown objectives
+    markSrt(array,size);
+    
+    //Display the Inputs/Outputs
+    cout<<"After Sorting"<<endl;
+    prntAry(array,size,perLine);
+
+    //Clean up the code, close files, deallocate memory, etc....
+    delete []array;
+    
+    //Exit stage right
     return 0;
 }
-int  read(char array[]){
-    int sizeDet=strlen(array); 
-}
-void sort(char array[],int sizeIn){
-    for(int count=0; count<sizeIn-1; count++){
-        for(int i=0; i<sizeIn-count-1; i++){
-            if(array[i]>array[i+1])
-            swap(array[i], array[i+1]);
+
+//Function Implementations
+void markSrt(int *a,int n){
+    //Find the smallest element in List i
+    for(int i=0;i<n-1;i++){
+        //Swap as you go to place the smallest element at the top
+        for(int j=i+1;j<n;j++){
+            //Logic swap
+            if(*(a+i)>*(a+j)){
+                *(a+i)=*(a+i)^*(a+j);
+                *(a+j)=*(a+i)^*(a+j);
+                *(a+i)=*(a+i)^*(a+j);
+            }
         }
     }
 }
-void print(const char array[],int sizeIn){
-    for(int count=0;count<sizeIn; count++){
-        cout<<array[count];
+
+
+void prntAry(const int *a,int n,int perLine){
+    cout<<endl;
+    for(int i=0;i<n;i++){
+        cout<<*(a+i)<<" ";
+        if(i%perLine==(perLine-1))cout<<endl;
     }
     cout<<endl;
+}
+
+int *filAray(int n){
+    //Declare and allocate the array
+    n=n<2?2:n;
+    int *array=new int[n];
+    for(int i=0;i<n;i++){
+        *(array+i)=rand()%90+10;//2 Digit Random Array
+    }
+    return array;
 }
