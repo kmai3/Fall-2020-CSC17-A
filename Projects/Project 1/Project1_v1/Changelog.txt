@@ -1,6 +1,10 @@
-Start of Project 2
-Project 0.9 -> 1  
-Adding Finishing Touches to the Game
-Bug Fixes and Balance Updates 
-Score Look Changed
-Added one more Captcha to put in add to score 
+Start of Project 1: CIS17A
+Import Project 2 from CIS 5
+Convert mob stats into structures to make the program easier to manage.
+Removed bot captcha because its honestly, too annoying
+
+Planned Changes:
+a config txt file
+changing up the score txt file
+using pointers instead of an array
+Adding Difficulty levels.

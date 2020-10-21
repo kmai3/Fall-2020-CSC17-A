@@ -1,7 +1,7 @@
 /*
  * File:   main.cpp
  * Author: Kevin Mai
- * Created on August 1, 2020, 5:00 PM
+ * Created on October 14, 2020, 11:00AM
  * Purpose: Dungeons and Dragon Board Game Project
  */
 
@@ -12,11 +12,10 @@
 #include <fstream> // To put in files
 #include <cstdlib> //Random Seed Time, Exit Function 
 #include <ctime> //Random Seed
-#include <vector> // Vectors 
 using namespace std;
 
 //User Libraries
-
+#include "bosses.h"
 //Global Constants, no Global Variables are allowed
 //Math/Physics/Conversions/Higher Dimensions - i.e. PI, e, etc...
 //Function Prototypes
@@ -40,8 +39,7 @@ bool dfight(string [], int &, int, int, int, int &, //Dragon Battle
             int, int, float &, int, int, int, int, string[][4]);
 void disS(float); //Displays Score in Decimal Value
 void disS(int); //Displays Score in Numeric Value
-void oDis(float); //Displays Score Overall  
-bool capt2(); //Captcha 2 
+void oDis(float); //Displays Score Overall   
 //Execution of Code Begins here
 int main(int argc, char** argv) {
     //Random seed
@@ -55,27 +53,9 @@ int main(int argc, char** argv) {
         atk ,//The atk value of the character
         fhp, // The HP of the fighter
         rhp, //The HP value of the ranger
-        gobhp, //HP of the goblin
-        skelhp, //HP of the Skeleton
-        ogrehp, //HP of the ogre
-        gskhp, //HP of the Skeleton Giant 
-        dmhp, //Hp of the Darkmage
         job, //job
-        gatk, //Attack of the Goblin
-        satk, //Attack of the Skeleton
-        oatk, //Attack of the Ogre
-        gsatk, //Attack of the Skeleton Giant 
-        dMatk, //Attack of the Dark Mage
-        datk, //Attack of the Dragon
-        rgob, //Rounds to beat goblin
-        rskel, //Rounds to beat skeleton
-        rogre, //Rounds to beat the ogre
-        rgskel, //Rounds to beat Giant Skeleton
-        rDMage, //Rounds to beat the Dark Mage
-        rdrag, //Rounds to beat the dragon
         n, //Size of the cpch vector 
         xp, // The amount of xp of the character, makes the character stronger
-        draghp; //HP of the Dragon
     char njob, //Job represented in a number
          start; // Start of the game Menu
     string name, //Name of the Player
@@ -86,7 +66,7 @@ int main(int argc, char** argv) {
     bool cont;
     string bosses[3][4]={{"Goblin", "Skeleton", "Ogre"},
                          {"Skeleton Giant", "Dark Mage", "Dragon"}};
-    vector<int> cpch(n); //used in computer check
+    bosses goblin, skele, ogre, gskele, dmage, dragon;
     
     //Initialize the code
     //Balancing Area Change Values to make it harder or easier
@@ -128,11 +108,6 @@ int main(int argc, char** argv) {
     //Start up of the Game
     start=start1();
     start2(start, njob, name, oldsc);
-    if(capt(cpch, n)){
-          cout<<"You Failed the Captcha"<<endl;
-          cout<<"Exiting....."<<endl;
-          exit(0);
-      } 
     //Attack values depend on xp and class 
     atk=atkcalc(njob,xp); 
     smobs(bosses);
@@ -330,37 +305,6 @@ void start2(char start, char &njob, string &name, string oldsc){
     else
     {
         cout<<oldsc<<endl;
-    }
-}
-bool capt(vector <int> &a, int n){
-    int s; //Smallest Number
-    cout<<"Bot Check"<<endl;
-    for(int i=0; i<n; i++){
-        a[i]=rand()%90+10; //[10,99]
-    }
-    a.shrink_to_fit();
-    for(int i=0; i<n; i++){
-        cout<<a[i]<<endl;
-    }
-    cout<<"What is the smallest number?"<<endl;
-    cin>>s;
-    for(int i=0; i<n-1;i++){
-        int minval=a[i];
-        int idx=i;
-        for(int j=i+1;j<n;j++){
-            if(minval>a[j]){
-             minval=a[j];
-             idx=j;
-            }
-        }
-        a[idx]=a[i];
-        a[i]=minval;
-    }
-    if(s==a[0]){
-        return false;
-    }
-    else{
-        return true;
     }
 }
 void smobs(string bosses[][4]){
@@ -784,31 +728,5 @@ void oDis(float score){
         case 2:disS(score2);break;
         case 3:disS(score);disS(score2);break;
         default:cout<<"Enter it in again"<<endl;cin>>useri;break;
-    }
-}
-bool capt2(){
-    cout<<"Bot Checker 2"<<endl;
-    int n=10;
-    int a[n];
-    int useri;
-    for(int i=0; i<n; i++){
-        a[i]=rand()%90+10; //[10,99]
-    }
-    for(int i=0; i<n; i++){
-        cout<<a[i]<<endl;
-    } 
-    int i, j;  
-    for (i = 0; i < n-1; i++)       
-    for (j = 0; j < n-i-1; j++)  
-        if (a[j] > a[j+1])  
-            swap(a[j], a[j+1]);    
-    for(int i=0; i<n; i++){
-        cout<<a[i]<<endl;
-    }
-    cout<<"Pick Any Number that Exist"<<endl;
-    cin>>useri;
-    int idx=-1;
-    for(int i=0;i<n;i++){
-        if(a[i]==useri)return true;
     }
 }
