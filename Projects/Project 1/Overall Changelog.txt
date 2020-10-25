@@ -9,6 +9,7 @@ CIS 5 Project2 -> Project1_v1
 - Many New Things Added this patch over 500 lines of code changed
 - Overall Change deemed a waste of time, as code kept breaking with the structures and pointers
 - Basically on the checkout sheet finished most of structures and pointers
+- Honestly, Should have put this into multiple verision would have saved me a lot of trouble finding errors, however I had an idea on how to minimize code and I couldn't stop.
 CIS 5 Project2 -> Project1_v1.5
 - Played around with the scoreboard
 - Found a bug with the score board regarding sending the information to a new text file 
@@ -16,3 +17,8 @@ CIS 5 Project2 -> Project1_v1.5
 Project 1_v1-> Project 1_v2
 - Implemented the scoreboard
 - Fixed all bugs regarding the scoreboard
+- Enter Information into score.txt, will show the previous score of the previous user if opened
+Project 1_v2-> Project 1_v3
+- Completely Fix the Input file
+- Shows Previous score + shows 
+- Writes to a Binary File 

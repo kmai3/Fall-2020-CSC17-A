@@ -17,11 +17,12 @@ using namespace std;
 //User Libraries
 #include "mobs.h"
 #include "heroes.h"
+#include "info.h"
 //Global Constants, no Global Variables are allowed
 //Math/Physics/Conversions/Higher Dimensions - i.e. PI, e, etc...
 //Function Prototypes
 char start1(); // Basic Menu to Start the Game
-void start2(char , char &, string &);
+void start2(char , char &, string &, fstream &);
 void smobs(string[][4]); //Displays the Mobs able to be fought 
 int atkcalc(int, int); // Calculates Attack value
 void compsc(); // Shows Completion Value 
@@ -41,6 +42,7 @@ Mobs *mobvalues();
 void game(float &, char );
 void destroy(Mobs *);
 void display(fstream &, string, char, float);
+void inBin(fstream &, string, char, float);
 //Execution of Code Begins here
 int main(int argc, char** argv) {
     
@@ -57,6 +59,7 @@ int main(int argc, char** argv) {
     fstream board;
     fstream binsc;
     board.open("score.txt", ios::in | ios::out);
+    binsc.open("score.bin", ios::in | ios::out | ios::binary);
     //Initialize the code
     //Balancing Area Change Values to make it harder or easier
     magehp=100;
@@ -68,12 +71,15 @@ int main(int argc, char** argv) {
     
     //Start up of the Game
     start=start1();
-    start2(start, njob, name);
+    start2(start, njob, name, board);
     //Attack values depend on xp and class 
     game(score, njob);
     //Score Showing in the txt file
     display(board, name, njob, score);
+    display(binsc, name, njob, score);
     //Clean up the code, close files, deallocate memory, etc...
+    board.close();
+    binsc.close();
     //Exit stage right
     return 0;
 }
@@ -85,36 +91,44 @@ char start1(){
     cin>>start;
     return start;
 }
-void start2(char start, char &njob, string &name){
+void start2(char start, char &njob, string &name,fstream &file){
     int vstart=start-48; //Converts into menu options with Type Casting
-    if (vstart==2) //Choice 2 Gives more information about the game 
-    {
-        cout<<"This is based off the board game Dungeons and Dragons"<<endl;
-        cout<<"The objective of the game is to clear the dungeon"<<endl;
-        cout<<"To clear the Dungeon you must kill 5 main monsters"<<endl;
-        cout<<"Each monster is weak to a certain attribute"<<endl;
-        cout<<"Read the game information to learn more about this"<<endl;
-        cout<<"You are to pick from 3 different classes"<<endl;
-        start=1;
-    }
-    else if (vstart==1) // After Starting, Player chooses a class
-    {
-        cout<<"Enter Your Name for Scoreboard"<<endl;
-        cin>>name;
-        cout<<"Pick a Class"<<endl;
-        cout<<"1=Mage, 2=Ranger, or 3=Fighter"<<endl;
-        cout<<"Enter in the Number Associated "<<endl;
-        cin>>njob;
-        while (njob>51 || njob<48)
+    do{
+        if (vstart==2) //Choice 2 Gives more information about the game 
         {
-            cout<<"Please Enter your Class Again"<<endl;
-            cin>>njob;
+            cout<<"This is based off the board game Dungeons and Dragons"<<endl;
+            cout<<"The objective of the game is to clear the dungeon"<<endl;
+            cout<<"To clear the Dungeon you must kill 5 main monsters"<<endl;
+            cout<<"Each monster is weak to a certain attribute"<<endl;
+            cout<<"Read the game information to learn more about this"<<endl;
+            cout<<"You are to pick from 3 different classes"<<endl;
+            exit(0);
         }
-    }
-    else
-    {
-        cout<<"nothing yet"<<endl;
-    }
+        else if (vstart==1) // After Starting, Player chooses a class
+        {
+            cout<<"Enter Your Name for Scoreboard"<<endl;
+            cin>>name;
+            cout<<"Pick a Class"<<endl;
+            cout<<"1=Mage, 2=Ranger, or 3=Fighter"<<endl;
+            cout<<"Enter in the Number Associated "<<endl;
+            cin>>njob;
+            while (njob>51 || njob<48)
+            {
+                cout<<"Please Enter your Class Again"<<endl;
+                cin>>njob;
+            }
+        }
+        else
+        {
+            Info info[3];
+            for(int i=0; i<4; i++){
+                getline(file, info[i].data);
+                cout<<info[i].data<<endl;
+            }
+            exit(0);
+            
+        }
+    }while(vstart!=1);
 }
 void smobs(string bosses[][4]){
     cout<<"Mob List"<<endl;
@@ -634,12 +648,13 @@ void destroy(Mobs *x){
 }
 void display(fstream &file, string name, char njob, float score){
     string role=(njob==49)?"Mage":(njob==50)?"Ranger":"Fighter";
+    file.seekg(0L, ios::beg);
     file << fixed;
     file << "Name: " << name << endl;
     file << "Class " << role << endl;
     file << "Score " << score << endl <<endl ;
     cout << fixed;
     cout << "Name: " << name << endl;
-    cout << "Class " << role << endl;
-    cout << "Score " << score << endl << endl;
+    cout << "Class: " << role << endl;
+    cout << "Score: " << score << endl << "0/" << endl;
 }
