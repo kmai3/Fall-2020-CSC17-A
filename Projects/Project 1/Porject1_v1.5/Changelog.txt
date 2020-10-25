@@ -1,0 +1,6 @@
+Start of Project 2
+Project 0.9 -> 1  
+Adding Finishing Touches to the Game
+Bug Fixes and Balance Updates 
+Score Look Changed
+Added one more Captcha to put in add to score 

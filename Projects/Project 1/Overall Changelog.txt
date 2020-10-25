@@ -1,0 +1,11 @@
+CIS 5 Project2 -> Project1_v1 
+-Made code more readable + shorter with the help of structures
+- Created Nested Structure having a mob stat with every mob structure
+- Puts mob values inside Mobs structure
+- Plans to add an easy, medium, hard mode to the game using these structures
+- Added New Function called Game, which runs through the dungeon vs 3 different games previously due to the different classes; tl;dr solved by structures lower amount of code
+- Added Heroes Structures for new game function 
+	- Heroes uses an enumarted data structure to 
+- Many New Things Added this patch over 500 lines of code changed
+- Overall Change deemed a waste of time, as code kept breaking with the structures and pointers
+CIS 5 Project2 -> Project1_v1.5

@@ -14,7 +14,7 @@
 #ifndef BOSSES_H
 #define BOSSES_H
 
-struct Bosses{
+struct Boss{
     int hp; //Health Points of the Unit
     int atk; // Attack value of the Unit
     int rounds; // Amount of Rounds until unit just wins

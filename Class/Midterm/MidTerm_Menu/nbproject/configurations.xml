@@ -4,6 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Array.h</itemPath>
+      <itemPath>Stats.h</itemPath>
       <itemPath>banking.h</itemPath>
       <itemPath>bdata.h</itemPath>
     </logicalFolder>
@@ -38,6 +40,10 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Array.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Stats.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="banking.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="bdata.h" ex="false" tool="3" flavor2="0">
@@ -65,6 +71,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Array.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Stats.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="banking.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="bdata.h" ex="false" tool="3" flavor2="0">
