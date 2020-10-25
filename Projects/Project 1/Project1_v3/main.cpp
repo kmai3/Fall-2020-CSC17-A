@@ -40,6 +40,7 @@ bool dfight(string [], int &, int ,int ,int &,
 Mobs *mobvalues();
 void game(float &, char );
 void destroy(Mobs *);
+void display(fstream &, string, char, float);
 //Execution of Code Begins here
 int main(int argc, char** argv) {
     
@@ -53,13 +54,14 @@ int main(int argc, char** argv) {
          start; // Start of the game Menu
     string name; //Name of the Player
     bool cont;
-    
+    fstream board;
+    fstream binsc;
+    board.open("score.txt", ios::in | ios::out);
     //Initialize the code
     //Balancing Area Change Values to make it harder or easier
     magehp=100;
     fhp=300;
     rhp=150;
-   
     score=100;
     
     //Scoreboard called score.txt
@@ -70,6 +72,7 @@ int main(int argc, char** argv) {
     //Attack values depend on xp and class 
     game(score, njob);
     //Score Showing in the txt file
+    display(board, name, njob, score);
     //Clean up the code, close files, deallocate memory, etc...
     //Exit stage right
     return 0;
@@ -628,4 +631,15 @@ void game(float &score, char njob){
 }
 void destroy(Mobs *x){
     delete x;
+}
+void display(fstream &file, string name, char njob, float score){
+    string role=(njob==49)?"Mage":(njob==50)?"Ranger":"Fighter";
+    file << fixed;
+    file << "Name: " << name << endl;
+    file << "Class " << role << endl;
+    file << "Score " << score << endl <<endl ;
+    cout << fixed;
+    cout << "Name: " << name << endl;
+    cout << "Class " << role << endl;
+    cout << "Score " << score << endl << endl;
 }

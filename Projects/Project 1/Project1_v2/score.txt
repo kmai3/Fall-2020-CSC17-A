@@ -1,0 +1,4 @@
+Name: Test
+Class Mage
+Score 92.000000
+
