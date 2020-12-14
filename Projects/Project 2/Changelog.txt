@@ -1,0 +1,4 @@
+Project 1_Import->Project2_V0.5
+-NewGame Foulder: Created to essentially recode the entire game from scratch.
+-NewGame will replace Project2_V0.5 or change it entirely.
+-Using Classes.

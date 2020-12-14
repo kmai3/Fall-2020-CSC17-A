@@ -1,0 +1,19 @@
+Basic
+---------------------------
+- hp : unsigned char
+- xp : unsigned char
+- atk : unsigned char
+- *score : unsigned char
+- cd : unsigned char
+- gob : Boss
+- skele : Boss
+- ogre : Boss
+- gskele : Boss
+- dmage : Boss
+- dragon : Boss
+---------------------------
++ Basic() :
++ Basic(njob : unsigned char):
++ Basic();
++ atkcalc() : void
++ showcd() : void
